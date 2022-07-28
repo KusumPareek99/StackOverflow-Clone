@@ -1,0 +1,55 @@
+<!-- 
+    1. user id  : from session
+    2. question id : 
+    3. ans id 
+    4. ans
+    5. image
+    6. points(thumbs up icon)
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Answer Form</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-fluid" style="margin-top:50px;">
+            <form action="/postans/postanswer" method="post" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Type your Answer </label>
+                    <textarea class="form-control" id="desc" name="Desc" rows=" 3 " placeholder="Description of answer "></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="mob_no" class="col-md-3 control-label">Choose an image to upload(if any)</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="file" name="uploaded_image" accept="" />
+                    </div>
+                </div>
+
+                <div class="form-group text-right ">
+                    <button type="submit " class="btn btn-secondary ">Submit</button>
+                </div>
+                <% if(data.length>0){ %>
+
+                    <input type="text" name="qid" value="<%= data[0].QuestionID %>" id="" hidden>
+
+                    <% } %>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
+
+</body>
+
+</html>

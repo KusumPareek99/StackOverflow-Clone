@@ -1,0 +1,67 @@
+<!-- 
+    1. question title (Req)
+    2. question description
+    3. keywords (Req)
+    4. date posted (req)
+    5 image (if any)
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Question Form</title>
+    <link rel="shortcut icon" href="stack-overflow.svg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-fluid" style="margin-top:50px;">
+            <form action="/quesans/postquestion" method="post" enctype="multipart/form-data">
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success col-sm-12">
+                        <%= message %>
+                    </div>
+                    <% } %>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Question Title * </label>
+                            <input type="text" class="form-control" name="Qsubject" id="title" placeholder="Type your question/problem here" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="desc" class="form-label">Question Description</label>
+                            <textarea class="form-control" id="desc" name="Desc" rows=" 3 " placeholder="Description of question if any... "></textarea>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <div class="form-group row ">
+                                <label for="kw" class="col-2 col-form-label ">Keywords * </label>
+                                <div class="col-10 ">
+                                    <input type="text" name="keywords" id="kw" class="form-control" placeholder="Separate keywords with a comma" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mob_no" class="col-md-3 control-label">Choose an image to upload(if any)</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="file" name="uploaded_image" accept="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group text-right ">
+                            <button type="submit " class="btn btn-secondary ">Submit</button>
+                        </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Question Answer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body style="overflow-x:hidden;">
+    <!-- Navigation Bar -->
+    <hr width="100%" style="margin:0;border:4px solid #f57003;">
+    <nav class="navbar bg-light" style="box-shadow: 0 2px 5px rgb(165, 156, 156);">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#">
+                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
+            </a>
+            <a class="nav-link" style="position:absolute;right:1100px;" href="#">About</a>
+            <form class="d-flex" role="search" style="position:absolute;right:700px;" method="post" action="/search">
+                <input class="form-control me-2" type="search" name="searchkeyword" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+            <form class="d-flex" role="login" style="position:absolute;right:50px;">
+                <% if(session.user_id && session.userType=='user'){ %>
+                    <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, User!" readonly>&nbsp;&nbsp;
+                    <a href="/logout" class="btn btn-primary">Logout</a>
+                    <% } else if(session.user_id && session.userType=='admin') { %>
+                        <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, Admin!" readonly>&nbsp;&nbsp;
+                        <a href="/logout" class="btn btn-primary">Logout</a>
+                        <% } else { %>
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-right:10px;">
+                               Login
+                               </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+                      Sign up
+                     </button>
+                            <% } %>
+            </form>
+        </div>
+    </nav>
+
+
+
+    <!-- Login  Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute;right:10px;top:5px;"></button>
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/1200px-Stack_Overflow_icon.svg.png" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top "
+                />
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">User Login </h5>
+
+                </div>
+                <form action="/login" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3 row ">
+
+                            <div class="dropdown" style="margin:20px 5px;">
+                                <select class="form-select" id="usertype" name="utype" aria-label="ChooseUser">
+                                   <option selected>--Choose a User--</option>
+                                   <option value="admin">Admin</option>
+                                   <option value="user">General User</option>
+                                 </select>
+                            </div>
+
+
+                            <label for="Email " class="col-sm-2 col-form-label ">User ID</label>
+                            <div class="col-sm-10 ">
+                                <input type="email" class="form-control " id="Email" name="username" placeholder="abc@example.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row ">
+                            <label for="inputPassword" class="col-sm-2 col-form-label ">Password</label>
+                            <div class="col-sm-10 ">
+                                <input type="password" name="password" class="form-control " id="inputPassword" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="Submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute;right:10px;top:5px;"></button>
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/1200px-Stack_Overflow_icon.svg.png" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top "
+                />
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLabel">User SignUp </h5>
+
+                </div>
+                <form action="/create" method="post">
+                    <div class="modal-body">
+
+                        <div class="mb-3 row ">
+                            <label for="Email " class="col-sm-2 col-form-label ">Email ID</label>
+                            <div class="col-sm-10 ">
+                                <input type="email" class="form-control" name="EmailID" id="Email" placeholder="abc@example.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row ">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10 ">
+                                <input type="password" name="Password" placeholder="password" class="form-control" id="inputPassword" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-outline-secondary " data-bs-dismiss="modal ">Close</button>
+                        <button type="Submit " class="btn btn-primary ">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Side navbar  -->
+    <div class="container ">
+        <button class="btn btn-primary d-lg-none " style="margin-top:15px;margin-left:10px " type="button " data-bs-toggle="offcanvas " data-bs-target="#offcanvasResponsive " aria-controls="offcanvasResponsive "><i class="material-icons " style="font-size:48px;color:white ">menu</i></button>
+
+        <div class="offcanvas-lg offcanvas-start " tabindex="-1 " id="offcanvasResponsive " aria-labelledby="offcanvasResponsiveLabel ">
+            <div class="offcanvas-header ">
+                <h5 class="offcanvas-title " id="offcanvasResponsiveLabel ">Responsive offcanvas</h5>
+                <button type="button " class="btn-close " data-bs-dismiss="offcanvas " data-bs-target="#offcanvasResponsive " aria-label="Close "></button>
+            </div>
+            <div class="offcanvas-body " style="padding-top:15px; ">
+                <p class="mb-0 ">
+                    <ul style="list-style-type:none;line-height:40px; ">
+                        <li><a style="text-decoration:none;color:black; " href="/">Stack Overflow</a></li>
+                        <li><a style="text-decoration:none;color:black; " href="http:// ">Tags</a></li>
+                        <li><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Answer thread -->
+        <div class="container main-content " style="position:absolute;top:80px;left:380px;border-left:2px solid rgb(195, 184, 184);height:auto; ">
+
+
+            <ul style="list-style-type:none;">
+                <% if (data.length){ %>
+
+
+
+                    <li>
+                        <h4>
+                            <%= data[0].Qsubject %>
+                        </h4>
+
+                    </li>
+
+                    <li>
+                        <%= data[0].Description %>
+
+                    </li>
+                    <% if(session.user_id) { %>
+                        <div class="col-4 ">
+                            <a href="/postans/<%= data[0].qid %>" class="btn btn-light" name="ansques" style="border-radius:3px;position:relative;left:900px;">Answer</a>
+                        </div>
+
+                        <% } %>
+                            <li>
+                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[0].qImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
+
+                            <hr width="80%">
+                            <h2>Answers</h2>
+                            <% for(var i=0; i < data.length; i++){ %>
+
+                                <li>
+                                    <label><%= i+1 %>.</label>
+                                    <%= data[i].Answer %>
+                                </li>
+
+                                <li>
+                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
+
+                                <hr width="80%">
+
+                                <% 
+
+                        
+                    } 
+                } %>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
+
+</body>
+
+</html>
