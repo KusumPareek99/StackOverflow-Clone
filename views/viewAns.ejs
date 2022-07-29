@@ -176,24 +176,29 @@
                         </div>
 
                         <% } %>
-                            <li>
-                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[0].qImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
-
-                            <hr width="80%">
-                            <h2>Answers</h2>
-                            <% for(var i=0; i < data.length; i++){ %>
-
+                            <% if(data[0].qImage != null){  %>
                                 <li>
-                                    <label><%= i+1 %>.</label>
-                                    <%= data[i].Answer %>
-                                </li>
+                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[0].qImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
+                                <% } %>
+                                    <hr width="80%">
+                                    <h2>Answers</h2>
+                                    <% for(var i=0; i < data.length; i++){ %>
 
-                                <li>
-                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
+                                        <li>
 
-                                <hr width="80%">
+                                            <div style="width:80%">
+                                                <label style="font-weight:bold;"><%= i+1 %>.</label>
+                                                <%= data[i].Answer %>
+                                            </div>
+                                        </li>
+                                        <% if(data[i].aImage != null){  %>
+                                            <li>
+                                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+                                            </li>
+                                            <% } %>
+                                                <hr width="80%">
 
-                                <% 
+                                                <% 
 
                         
                     } 

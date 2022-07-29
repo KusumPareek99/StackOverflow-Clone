@@ -49,14 +49,32 @@ router.post('/postanswer', function(request, response) {
     console.log(hours + ":" + minutes);
     var datetoday = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 
-    if (!request.files)
-        return response.status(400).send('No files were uploaded.');
-    var file = request.files.uploaded_image;
-    var img_name = file.name;
-
     var uid = request.session.user_id;
 
     var qid = request.body.qid;
+
+    if (!request.files) {
+        var sql = ''
+        if (request.session.userType = 'admin') {
+            sql = `INSERT INTO answer (Answer,PostedDated,QuestionID,AdminID) VALUES ("${description}","${datetoday}","${qid}","${uid}");`;
+
+        } else {
+            sql = `INSERT INTO answer (Answer,PostedDated,QuestionID,UserID) VALUES ("${description}","${datetoday}","${qid}","${uid}");`;
+
+        }
+
+        console.log("Query : ", sql);
+        database.query(sql, function(err, res) {
+            if (err) {
+                throw err;
+            }
+            console.log('Answer without image Inserted successfully ', res.affectedRows);
+
+        })
+        response.redirect('/')
+    }
+    var file = request.files.uploaded_image;
+    var img_name = file.name;
     console.log("Question id in post", qid);
     if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
 
@@ -64,8 +82,14 @@ router.post('/postanswer', function(request, response) {
 
             if (err)
                 return response.status(500).send(err);
-            //  Query to insert details in question table
-            var sql = `INSERT INTO answer (Answer,PostedDated,Image,QuestionID,UserID) VALUES ("${description}","${datetoday}","${img_name}","${qid}","${uid}");`;
+            var sql = ''
+                //  Query to insert details in question table
+            if (request.session.userType == 'admin') {
+                sql = `INSERT INTO answer (Answer,PostedDated,Image,QuestionID,AdminID) VALUES ("${description}","${datetoday}","${img_name}","${qid}","${uid}");`;
+
+            } else {
+                sql = `INSERT INTO answer (Answer,PostedDated,Image,QuestionID,UserID) VALUES ("${description}","${datetoday}","${img_name}","${qid}","${uid}");`;
+            }
             console.log("Query : ", sql);
             database.query(sql, function(err, res) {
                 if (err) {

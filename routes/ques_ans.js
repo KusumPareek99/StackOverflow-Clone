@@ -47,7 +47,13 @@ router.post('/postquestion', function(request, response) {
 
     if (!request.files) {
         //  Query to insert details in question table
-        var sql = `INSERT INTO quest (Qsubject,Description,DatePosted,UserID) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}");`;
+        var sql = ''
+        if (request.session.userType == 'admin') {
+            sql = `INSERT INTO quest (Qsubject,Description,DatePosted,AdminID) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}");`;
+        } else {
+            sql = `INSERT INTO quest (Qsubject,Description,DatePosted,UserID) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}");`;
+        }
+
         console.log("Query : ", sql);
         database.query(sql, function(err, res) {
 
@@ -102,7 +108,15 @@ router.post('/postquestion', function(request, response) {
             if (err)
                 return response.status(500).send(err);
             //  Query to insert details in question table
-            var sql = `INSERT INTO quest (Qsubject,Description,DatePosted,UserID,Image) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}","${img_name}");`;
+            var sql = ''
+            if (request.session.userType == 'admin') {
+                sql = `INSERT INTO quest (Qsubject,Description,DatePosted,AdminID,Image) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}","${img_name}");`;
+
+            } else {
+                sql = `INSERT INTO quest (Qsubject,Description,DatePosted,UserID,Image) VALUES ("${qtitle}","${desc}","${datetoday}","${uid}","${img_name}");`;
+
+            }
+
             console.log("Query : ", sql);
             database.query(sql, function(err, res) {
 
