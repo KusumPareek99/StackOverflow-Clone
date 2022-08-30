@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196">
     <title>Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/public/images/Stack_Overflow_icon.svg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 </head>
 
-<body>
+<body style="overflow-x:hidden;font-family: 'Roboto Slab', serif;border-top:4px solid #F48024;">
     <!-- Navigation Bar -->
-    <hr width="100%" style="margin:0;border:4px solid #f57003;">
-    <nav class="navbar bg-light" style="box-shadow: 0 2px 5px rgb(165, 156, 156);">
+
+    <nav class="navbar bg-light" id="navbar_top" style="box-shadow: 0 2px 5px #BBC0C4">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="#">
@@ -34,11 +39,11 @@
                         <a href="/logout" class="btn btn-primary">Logout</a>
                         <% } else { %>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-right:10px;">
-                                 Login
-                                 </button>
+                                Login
+                                </button>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
-                        Sign up
-                       </button>
+                       Sign up
+                      </button>
                             <% } %>
             </form>
         </div>
@@ -52,8 +57,7 @@
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute;right:10px;top:5px;"></button>
 
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/1200px-Stack_Overflow_icon.svg.png" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top "
-                />
+                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px;" class="d-inline-block align-text-top" />
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel">User Login </h5>
@@ -65,22 +69,22 @@
 
                             <div class="dropdown" style="margin:20px 5px;">
                                 <select class="form-select" id="usertype" name="utype" aria-label="ChooseUser">
-                                     <option selected>--Choose a User--</option>
-                                     <option value="admin">Admin</option>
-                                     <option value="user">User</option>
-                                   </select>
+                                <option selected>--Choose a User--</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                              </select>
                             </div>
 
 
                             <label for="Email " class="col-sm-2 col-form-label ">User ID</label>
                             <div class="col-sm-10 ">
-                                <input type="email" class="form-control " id="Email" name="username" placeholder="abc@example.com" required>
+                                <input type="email" class="form-control" id="EmailLogin" name="username" placeholder="abc@example.com" required>
                             </div>
                         </div>
                         <div class="mb-3 row ">
-                            <label for="inputPassword" class="col-sm-2 col-form-label ">Password</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10 ">
-                                <input type="password" name="password" class="form-control " id="inputPassword" required>
+                                <input type="password" name="password" class="form-control" id="inputPassword" required>
                             </div>
                         </div>
                     </div>
@@ -99,8 +103,7 @@
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute;right:10px;top:5px;"></button>
 
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Stack_Overflow_icon.svg/1200px-Stack_Overflow_icon.svg.png" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top "
-                />
+                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top " />
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel">User SignUp </h5>
@@ -110,7 +113,7 @@
                     <div class="modal-body">
 
                         <div class="mb-3 row ">
-                            <label for="Email " class="col-sm-2 col-form-label ">Email ID</label>
+                            <label for="Email " class="col-sm-2 col-form-label">Email ID</label>
                             <div class="col-sm-10 ">
                                 <input type="email" class="form-control" name="EmailID" id="Email" placeholder="abc@example.com" required>
                             </div>
@@ -118,13 +121,21 @@
                         <div class="mb-3 row ">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10 ">
-                                <input type="password" name="Password" placeholder="password" class="form-control" id="inputPassword" required>
+                                <input type="password" name="Password" placeholder="password" class="form-control" id="inputPasswordSignup" required>
+                            </div>
+                        </div>
+                        <!-- Confirm Password Added -->
+                        <div class="mb-3 row ">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+                            <div class="col-sm-10 ">
+                                <input type="password" name="CPassword" placeholder="confirm password" class="form-control" id="inputConfirmPassword" required onkeyup="validate_password()">
                             </div>
                         </div>
                     </div>
+                    <span id="wrong_pass_alert"></span>
                     <div class="modal-footer ">
-                        <button type="button " class="btn btn-outline-secondary " data-bs-dismiss="modal ">Close</button>
-                        <button type="Submit " class="btn btn-primary ">Register</button>
+                        <button type="button" class="btn btn-outline-secondary " data-bs-dismiss="modal">Close</button>
+                        <button type="Submit" id="create" class="btn btn-primary ">Register</button>
                     </div>
                 </form>
             </div>
@@ -132,7 +143,7 @@
     </div>
 
     <!-- Offcanvas Side navbar  -->
-    <div class="container ">
+    <div class="container">
         <button class="btn btn-primary d-lg-none " style="margin-top:15px;margin-left:10px " type="button " data-bs-toggle="offcanvas " data-bs-target="#offcanvasResponsive " aria-controls="offcanvasResponsive "><i class="material-icons " style="font-size:48px;color:white ">menu</i></button>
 
         <div class="offcanvas-lg offcanvas-start " tabindex="-1 " id="offcanvasResponsive " aria-labelledby="offcanvasResponsiveLabel ">
@@ -140,21 +151,21 @@
                 <h5 class="offcanvas-title " id="offcanvasResponsiveLabel ">Responsive offcanvas</h5>
                 <button type="button " class="btn-close " data-bs-dismiss="offcanvas " data-bs-target="#offcanvasResponsive " aria-label="Close "></button>
             </div>
-            <div class="offcanvas-body " style="padding-top:15px;position:relative;right:60px; ">
+            <div class="offcanvas-body " style="padding-top:15px;position:relative;right: 100px; ">
                 <p class="mb-0 ">
                     <ul style="list-style-type:none;line-height:40px; ">
-                        <li style="padding-right:0;padding-left:0;"><a style="text-decoration:none;color:black; " href="/">Stack Overflow</a></li>
-                        <li style="padding-right:0;padding-left:0;"><a style="text-decoration:none;color:black; " href="http:// ">Tags</a></li>
-                        <li style="border-right:5px solid #f57003;background-color:aliceblue;padding-right:9px;padding-left:5px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
+                        <li style="padding-right:18px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/">Questions</a></li>
+                        <li style="padding-right:18px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/tags">Tags</a></li>
+                        <li style="border-right:5px solid #F48024;background-color:aliceblue;padding-right:47px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
                     </ul>
                 </p>
             </div>
         </div>
 
-        <div class="container chart" style="position:absolute;top:80px;left:200px;">
+        <div class="container chart" style="position:relative;left:90px;top:-150px;border-left:2px solid rgb(195, 184, 184);height:640px;padding-left:20px; ">
             <% if(result.length){ %>
-                <h1 style="text-align:center;margin-top:15px;margin-bottom:15px;">Trending Technologies</h1>
-                <canvas id="chart" style="width:200px;height:50px; background:rgb(248, 243, 243);border:3px solid #6a4309;margin-top:10px;"></canvas>
+                <h1 style="text-align:center;margin-top:15px;margin-bottom:15px;">Trending Topics</h1><br>
+                <canvas id="chart" style="width:200px;height:70px; background:rgba(246, 233, 219, 0.292);   margin-top:10px;"></canvas>
 
                 <% } else{ %>
                     <h1>
@@ -181,18 +192,18 @@
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Programming Languages',
-                backgroundColor: 'rgb(245, 112, 3)',
+                label: 'Trending Topics',
+                backgroundColor: 'rgb(248, 112, 3)',
                 borderColor: 'rgb(245, 112, 3)',
                 barThickness: 50,
-
+                fontFamily: 'Roboto Slab',
                 categoryPercentage: 1,
                 data: countArr,
             }]
         };
 
         const config = {
-            type: 'bar',
+            type: 'line',
             data: data,
             options: {
                 scales: {
@@ -207,7 +218,8 @@
                         labels: {
                             font: {
                                 size: 16,
-                                weight: 'bolder'
+                                weight: 'bolder',
+                                family: 'Roboto Slab',
                             }
                         }
                     }
@@ -221,7 +233,40 @@
             config
         );
     </script>
+    <script>
+        function validate_password() {
 
+            var pass = document.getElementById('inputPasswordSignup').value;
+            var confirm_pass = document.getElementById('inputConfirmPassword').value;
+            if (pass != confirm_pass) {
+                document.getElementById('wrong_pass_alert').style.color = 'red';
+                document.getElementById('wrong_pass_alert').innerHTML = '☒ Use same password.Please enter same passwords.';
+                document.getElementById('create').disabled = true;
+                document.getElementById('create').style.opacity = (0.4);
+            } else {
+                document.getElementById('wrong_pass_alert').style.color = 'green';
+                document.getElementById('wrong_pass_alert').innerHTML = '🗹 Password Matched';
+                document.getElementById('create').disabled = false;
+                document.getElementById('create').style.opacity = (1);
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    document.getElementById('navbar_top').classList.add('fixed-top');
+                    // add padding top to show content behind navbar
+                    navbar_height = document.querySelector('.navbar').offsetHeight;
+                    document.body.style.paddingTop = navbar_height + 'px';
+                } else {
+                    document.getElementById('navbar_top').classList.remove('fixed-top');
+                    // remove padding top from body
+                    document.body.style.paddingTop = '0';
+                }
+            });
+        });
+    </script>
 </body>
 
 

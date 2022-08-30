@@ -10,7 +10,7 @@ router.get('/postans/:QuestionID', function(request, response) {
         if (err) {
             throw err;
         }
-        response.render('ans_question', { title: 'Express', message: '', data: result });
+        response.render('ans_question', { title: 'Express', message: '', data: result, session: request.session });
     });
 
 });

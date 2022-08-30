@@ -7,7 +7,7 @@ var database = require('../database');
 /* GET home page. */
 router.get('/', function(req, res) {
 
-    database.query('SELECT QuestionID, Qsubject , Description,UserID,Image from quest ORDER BY DatePosted DESC', function(err, rows) {
+    database.query('SELECT QuestionID, Qsubject , Description,UserID,Image,date_format(DatePosted,"%m-%d-%y %h:%i %p") AS DatePosted from quest ORDER BY DatePosted DESC', function(err, rows) {
         if (err) {
             res.render('index', { title: 'Express', session: req.session, data: '' });
         } else {
@@ -96,11 +96,13 @@ router.post('/login', function(request, response, next) {
 
 router.post('/create', function(request, response, next) {
     // store all the user input data
-    const userDetails = request.body;
+    // const userDetails = request.body;
+    const email = request.body.EmailID;
+    const pass = request.body.Password;
     //console.log(userDetails);
     // insert user data into users table
-    var sql = 'INSERT INTO user SET ?';
-    database.query(sql, userDetails, function(err, data) {
+    var sql = `INSERT INTO user (EmailID,Password) VALUES ("${email}","${pass}")`;
+    database.query(sql, function(err, data) {
         if (err) throw err;
         console.log("Data is inserted successfully ");
     });
@@ -120,15 +122,14 @@ router.post('/search', function(request, response) {
     if (kw == '') {
         response.redirect('/');
     }
-    // IMAGE FUNCTIONALITY NEEDS TO BE ADDED
-    var searchquery = `SELECT QuestionID,QSubject,Description,Image,DatePosted FROM quest WHERE QuestionID IN (SELECT questID FROM keywords WHERE keyword LIKE '%${kw}%') order by DatePosted DESC;`;
+    var searchquery = `SELECT QuestionID,QSubject,Description,Image,date_format(DatePosted,"%m-%d-%y %h:%i %p") AS DatePosted FROM quest WHERE QuestionID IN (SELECT questID FROM keywords WHERE keyword LIKE '%${kw}%') order by DatePosted DESC;`;
     console.log("QUERY :", searchquery);
     database.query(searchquery, function(err, searchdata) {
         console.log("DATA :", searchdata)
         if (searchdata.length > 0) {
-            response.render('search', { data: searchdata, session: request.session })
+            response.render('search', { data: searchdata, session: request.session, keyword: kw })
         } else {
-            response.render('search', { data: '', session: request.session })
+            response.render('search', { data: '', session: request.session, keyword: kw })
             console.log("No search results found! Try some other keyword.")
         }
     })
@@ -164,6 +165,39 @@ router.get('/viewchart', function(req, res) {
         }
     })
 
-})
+});
+
+router.get('/tags', function(req, res) {
+    var sql = `select keyword,count(*) as total from keywords group by keyword order by total desc;`
+    console.log(sql)
+    database.query(sql, function(err, result) {
+        var message = '';
+        if (result.length > 0) {
+            res.render('tags', { result: result, message: message, session: req.session });
+        } else {
+            message = "No Data!"
+            res.render('tags', { result: '', message: message, session: req.session });
+        }
+    });
+});
+
+router.get('/tagsredirect/:tag', function(request, response) {
+    var kw = request.params.tag;
+    console.log(kw)
+    if (kw == '') {
+        response.redirect('/');
+    }
+    var searchquery = `SELECT QuestionID,QSubject,Description,Image,date_format(DatePosted,"%m-%d-%y %h:%i %p") AS DatePosted FROM quest WHERE QuestionID IN (SELECT questID FROM keywords WHERE keyword LIKE '%${kw}%') order by DatePosted DESC;`;
+    console.log("QUERY :", searchquery);
+    database.query(searchquery, function(err, searchdata) {
+        console.log("DATA :", searchdata)
+        if (searchdata.length > 0) {
+            response.render('search', { data: searchdata, session: request.session, keyword: kw })
+        } else {
+            response.render('search', { data: '', session: request.session, keyword: kw })
+            console.log("No search results found! Try some other keyword.")
+        }
+    })
+});
 
 module.exports = router;

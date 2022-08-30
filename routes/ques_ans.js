@@ -5,7 +5,7 @@ var router = express.Router();
 var database = require('../database');
 router.get('/', function(request, response, ) {
 
-    response.render('askQuestion', { message: '' });
+    response.render('askQuestion', { message: '', session: request.session });
 });
 
 router.post('/postquestion', function(request, response) {

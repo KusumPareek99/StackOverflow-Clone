@@ -39,6 +39,7 @@ app.use('/quesans', ques_ans);
 app.get('/postans/:QuestionID', postans);
 app.use('/postans', postans);
 app.get('/myans/:QuestionID', indexRouter);
+app.get('/tagsredirect/:tag', indexRouter);
 //app.use('/viewchart', dashboard);
 
 // catch 404 and forward to error handler
