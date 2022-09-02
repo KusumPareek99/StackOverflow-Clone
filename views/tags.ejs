@@ -156,6 +156,9 @@
                         <li style="padding-right:120px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/">Questions</a></li>
                         <li style="border-right:5px solid #F48024;background-color:aliceblue;padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/tags">Tags</a></li>
                         <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
+                        <% if(session.user_id && session.userType=='admin') { %>
+                            <li style="padding-right:120px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/viewusers">Users</a></li>
+                            <% } %>
                     </ul>
                 </p>
             </div>

@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196">
-    <title>Dashboard</title>
 
+    <title>Stack Overflow Clone</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/public/images/Stack_Overflow_icon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 </head>
@@ -19,34 +18,34 @@
 <body style="overflow-x:hidden;font-family: 'Roboto Slab', serif;border-top:4px solid #F48024;">
     <!-- Navigation Bar -->
 
-    <nav class="navbar bg-light" id="navbar_top" style="box-shadow: 0 2px 5px #BBC0C4">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-light" id="navbar_top" style="box-shadow: 0 2px 5px #BBC0C4">
 
-            <a class="navbar-brand" href="#">
-                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
-            </a>
-            <a class="nav-link" style="position:absolute;right:1100px;" href="#">About</a>
-            <form class="d-flex" role="search" style="position:absolute;right:700px;" method="post" action="/search">
-                <input class="form-control me-2" type="search" name="searchkeyword" placeholder="Search..." aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
-            </form>
-            <form class="d-flex" role="login" style="position:absolute;right:50px;">
-                <% if(session.user_id && session.userType=='user'){ %>
-                    <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, User!" readonly>&nbsp;&nbsp;
+
+        <a class="navbar-brand" href="#">
+            <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
+        </a>
+        <a class="nav-link" style="position:absolute;right:1100px;" href="#">About</a>
+        <form class="d-flex" role="search" style="position:absolute;right:700px;" method="post" action="/search">
+            <input class="form-control me-2" type="search" name="searchkeyword" placeholder="Search..." aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+        <form class="d-flex" role="login" style="position:absolute;right:50px;">
+            <% if(session.user_id && session.userType=='user'){ %>
+                <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, User!" readonly>&nbsp;&nbsp;
+                <a href="/logout" class="btn btn-primary">Logout</a>
+                <% } else if(session.user_id && session.userType=='admin') { %>
+                    <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, Admin!" readonly>&nbsp;&nbsp;
                     <a href="/logout" class="btn btn-primary">Logout</a>
-                    <% } else if(session.user_id && session.userType=='admin') { %>
-                        <input type="text" style="border:none;color:rgb(10, 112, 246);text-align:center;font-weight:bold" name="username" id="" value="Welcome, Admin!" readonly>&nbsp;&nbsp;
-                        <a href="/logout" class="btn btn-primary">Logout</a>
-                        <% } else { %>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-right:10px;">
+                    <% } else { %>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-right:10px;">
                                 Login
                                 </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
                        Sign up
                       </button>
-                            <% } %>
-            </form>
-        </div>
+                        <% } %>
+        </form>
+
     </nav>
 
 
@@ -57,7 +56,7 @@
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute;right:10px;top:5px;"></button>
 
-                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px;" class="d-inline-block align-text-top" />
+                <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo " width="200 " height="160px " style="position:relative;left:150px;top:20px; " class="d-inline-block align-text-top " />
                 <div class="modal-header">
 
                     <h5 class="modal-title" id="exampleModalLabel">User Login </h5>
@@ -69,22 +68,22 @@
 
                             <div class="dropdown" style="margin:20px 5px;">
                                 <select class="form-select" id="usertype" name="utype" aria-label="ChooseUser">
-                                <option selected>--Choose a User--</option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                              </select>
+                                    <option selected>--Choose a User--</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                  </select>
                             </div>
 
 
                             <label for="Email " class="col-sm-2 col-form-label ">User ID</label>
                             <div class="col-sm-10 ">
-                                <input type="email" class="form-control" id="EmailLogin" name="username" placeholder="abc@example.com" required>
+                                <input type="email" class="form-control " id="LoginEmail" name="username" placeholder="abc@example.com" required>
                             </div>
                         </div>
                         <div class="mb-3 row ">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label ">Password</label>
                             <div class="col-sm-10 ">
-                                <input type="password" name="password" class="form-control" id="inputPassword" required>
+                                <input type="password" name="password" class="form-control " id="inputPassword" required>
                             </div>
                         </div>
                     </div>
@@ -113,7 +112,7 @@
                     <div class="modal-body">
 
                         <div class="mb-3 row ">
-                            <label for="Email " class="col-sm-2 col-form-label">Email ID</label>
+                            <label for="Email " class="col-sm-2 col-form-label ">Email ID</label>
                             <div class="col-sm-10 ">
                                 <input type="email" class="form-control" name="EmailID" id="Email" placeholder="abc@example.com" required>
                             </div>
@@ -134,8 +133,8 @@
                     </div>
                     <span id="wrong_pass_alert"></span>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-outline-secondary " data-bs-dismiss="modal">Close</button>
-                        <button type="Submit" id="create" class="btn btn-primary ">Register</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="Submit" id="create" class="btn btn-primary">Register</button>
                     </div>
                 </form>
             </div>
@@ -143,7 +142,7 @@
     </div>
 
     <!-- Offcanvas Side navbar  -->
-    <div class="container">
+    <div class="container ">
         <button class="btn btn-primary d-lg-none " style="margin-top:15px;margin-left:10px " type="button " data-bs-toggle="offcanvas " data-bs-target="#offcanvasResponsive " aria-controls="offcanvasResponsive "><i class="material-icons " style="font-size:48px;color:white ">menu</i></button>
 
         <div class="offcanvas-lg offcanvas-start " tabindex="-1 " id="offcanvasResponsive " aria-labelledby="offcanvasResponsiveLabel ">
@@ -151,91 +150,52 @@
                 <h5 class="offcanvas-title " id="offcanvasResponsiveLabel ">Responsive offcanvas</h5>
                 <button type="button " class="btn-close " data-bs-dismiss="offcanvas " data-bs-target="#offcanvasResponsive " aria-label="Close "></button>
             </div>
-            <div class="offcanvas-body " style="padding-top:15px;position:relative;right: 100px; ">
+            <div class="offcanvas-body " style="padding-top:15px; ">
                 <p class="mb-0 ">
                     <ul style="list-style-type:none;line-height:40px; ">
-                        <li style="padding-right:18px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/">Questions</a></li>
-                        <li style="padding-right:18px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/tags">Tags</a></li>
-                        <li style="border-right:5px solid #F48024;background-color:aliceblue;padding-right:47px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
+                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/">Questions</a></li>
+                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/tags">Tags</a></li>
+                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
                         <% if(session.user_id && session.userType=='admin') { %>
-                            <li style="padding-right:18px;padding-left:25px;"><a style="text-decoration:none;color:black; " href="/viewusers">Users</a></li>
+                            <li style="border-right:5px solid #F48024;background-color:aliceblue;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/viewusers">Users</a></li>
                             <% } %>
                     </ul>
                 </p>
             </div>
         </div>
 
-        <div class="container chart" style="position:relative;left:90px;top:-150px;border-left:2px solid rgb(195, 184, 184);height:640px;padding-left:20px; ">
-            <% if(result.length){ %>
-                <h1 style="text-align:center;margin-top:15px;margin-bottom:15px;">Trending Topics</h1><br>
-                <canvas id="chart" style="width:200px;height:70px; background:rgba(246, 233, 219, 0.292);   margin-top:10px;"></canvas>
+        <!-- Main Content : All Questions -->
+        <div class="container main-content " style="position:absolute;top:80px;left:380px;border-left:2px solid rgb(195, 184, 184);height:auto; ">
+            <div class="row justify-content-between ">
+                <div class="col-4 ">
+                    <h1>All Users</h1>
+                </div>
+                <!-- <% if(session.user_id && session.userType == 'admin'){ %>
+                    <div class="col-4 ">
+                        <a href="" class="btn btn-primary" name="postquestion" style="border-radius:3px">Post a Question</a>
+                    </div>
+                    <% }  %> -->
 
-                <% } else{ %>
-                    <h1>
-                        <%= message %>
-                    </h1>
-                    <% } %>
+
+
+            </div>
+
+            <ul style="list-style-type:none;">
+                <% if (result.length){ 
+                    for(var i=0; i < result.length; i++){ %>
+                    <hr width="80%">
+                    <li>
+                        <%= result[i].uid %> :
+                            <%= result[i].eid %> asked **
+                                <%= result[i].TotalQuestionsAsked %> question **
+                    </li>
+                    <% }
+            } %>
+
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        var klen = "<%= result.length %>";
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
 
-        "<% var keywords = []; for(i=0;i< result.length; i++){ keywords.push(result[i].keyword); };  %>"
-        var keywords = "<%= keywords %>"
-        var keywordArr = keywords.split(',')
-
-        "<% var count = []; for(i=0;i< result.length; i++){ count.push(result[i].total); };  %>"
-        var count = "<%= count %>"
-        var countArr = count.split(',')
-
-        const labels = keywordArr;
-
-
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Trending Topics',
-                backgroundColor: 'rgb(248, 112, 3)',
-                borderColor: 'rgb(245, 112, 3)',
-                barThickness: 50,
-                fontFamily: 'Roboto Slab',
-                categoryPercentage: 1,
-                data: countArr,
-            }]
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-
-                },
-
-                plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                size: 16,
-                                weight: 'bolder',
-                                family: 'Roboto Slab',
-                            }
-                        }
-                    }
-                }
-            },
-        };
-    </script>
-    <script>
-        const myChart = new Chart(
-            document.getElementById('chart'),
-            config
-        );
-    </script>
     <script>
         function validate_password() {
 
@@ -271,6 +231,5 @@
         });
     </script>
 </body>
-
 
 </html>

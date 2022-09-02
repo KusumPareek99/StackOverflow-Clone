@@ -167,6 +167,23 @@ router.get('/viewchart', function(req, res) {
 
 });
 
+router.get('/viewusers', function(req, res) {
+    var sql = `SELECT quest.UserID AS uid,user.EmailID as eid,count(quest.UserID) AS TotalQuestionsAsked FROM stackoverflowclone.quest,stackoverflowclone.user where quest.UserID=user.UserID group by quest.UserID order by count(quest.UserID)DESC;`
+    console.log(sql);
+    database.query(sql, function(err, result) {
+        var message = "";
+        if (result.length > 0) {
+            res.render('viewUsers', { result: result, message: message, session: req.session });
+        } else {
+            message = "No Users to show";
+            res.render('viewUsers', { result: '', message: message, session: req.session });
+        }
+    })
+
+})
+
+
+
 router.get('/tags', function(req, res) {
     var sql = `select keyword,count(*) as total from keywords group by keyword order by total desc;`
     console.log(sql)
