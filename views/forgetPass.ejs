@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body style="overflow-x:hidden;font-family: 'Roboto Slab', serif;border-top:4px solid #F48024;">
+
+    <nav class="navbar navbar-expand-sm bg-light" id="navbar_top" style="box-shadow: 0 2px 5px #BBC0C4">
+
+
+        <a class="navbar-brand" href="/">
+            <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
+        </a>
+    </nav>
+
+    <div class="form-gap" style="text-align: center;position:relative;top:50px">
+        <h4>You will recieve an email</h4>
+        <h5 class="alert alert-<%= type %> col-sm-5" style="position:relative;left:450px;">
+            <%= message %>
+        </h5>
+    </div>
+    <div class="container" style="position:relative;top:100px;">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <form action="/reset-pass/resetpass" method="post">
+                        <div class="panel-body" style="background-color:aliceblue; border:2px solid #BBC0C4;">
+                            <div class="text-center">
+                                <h3><i class="fa fa-lock fa-4x"></i></h3>
+                                <h2 class="text-center">Forgot Password?</h2>
+                                <p>You can reset your password here.</p>
+                                <div class="panel-body">
+
+                                    <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                                <input id="email" name="email" placeholder="Type you registered email here" class="form-control" type="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                                        </div>
+
+                                        <!-- <input type="hidden" class="hide" name="token" id="token" value=""> -->
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,8 +1,15 @@
 var createError = require('http-errors');
+
+var flash = require('express-flash');
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 var fileupload = require('express-fileupload');
 
@@ -10,9 +17,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ques_ans = require("./routes/ques_ans");
 var postans = require("./routes/post_ans");
+var resetpass = require('./routes/resetPassword')
 
-
-var session = require('express-session');
 
 var app = express();
 app.use(session({
@@ -40,8 +46,19 @@ app.get('/postans/:QuestionID', postans);
 app.use('/postans', postans);
 app.get('/myans/:QuestionID', indexRouter);
 app.get('/tagsredirect/:tag', indexRouter);
-//app.use('/viewchart', dashboard);
+app.use('/reset-pass', resetpass)
+app.get('/upvote/:uid', indexRouter)
+    //app.use('/viewchart', dashboard);
 
+
+/*app.use(session({
+    secret: 'miniproject',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}))*/
+
+app.use(flash());
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));

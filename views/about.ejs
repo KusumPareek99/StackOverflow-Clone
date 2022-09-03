@@ -24,7 +24,7 @@
         <a class="navbar-brand" href="/">
             <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
         </a>
-        <a class="nav-link" style="position:absolute;right:1100px;" href="/about">About</a>
+        <a class="nav-link" style="position:absolute;right:1100px;" href="#">About</a>
         <form class="d-flex" role="search" style="position:absolute;right:700px;" method="post" action="/search">
             <input class="form-control me-2" type="search" name="searchkeyword" placeholder="Search..." aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -86,6 +86,9 @@
                                 <input type="password" name="password" class="form-control " id="inputPassword" required>
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                            <a href="/forgetpass">Forget Password</a>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -145,55 +148,79 @@
     <div class="container ">
         <button class="btn btn-primary d-lg-none " style="margin-top:15px;margin-left:10px " type="button " data-bs-toggle="offcanvas " data-bs-target="#offcanvasResponsive " aria-controls="offcanvasResponsive "><i class="material-icons " style="font-size:48px;color:white ">menu</i></button>
 
-        <div class="offcanvas-lg offcanvas-start " tabindex="-1 " id="offcanvasResponsive " aria-labelledby="offcanvasResponsiveLabel ">
-            <div class="offcanvas-header ">
-                <h5 class="offcanvas-title " id="offcanvasResponsiveLabel ">Responsive offcanvas</h5>
-                <button type="button " class="btn-close " data-bs-dismiss="offcanvas " data-bs-target="#offcanvasResponsive " aria-label="Close "></button>
+
+        <div class="container main-content" style="display:flex;">
+            <div>
+                <img src="images/undraw_connected_world_wuay.svg" alt="Connected World" width="450px" height="500px">
             </div>
-            <div class="offcanvas-body " style="padding-top:15px; ">
-                <p class="mb-0 ">
-                    <ul style="list-style-type:none;line-height:40px; ">
-                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/">Questions</a></li>
-                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/tags">Tags</a></li>
-                        <li style="padding-right:119px;padding-left:37px;"><a style="text-decoration:none;color:black; " href="/viewchart">Dashboard</a></li>
-                        <% if(session.user_id && session.userType=='admin') { %>
-                            <li style="border-right:5px solid #F48024;background-color:aliceblue;padding-left:37px;width:227px"><a style="text-decoration:none;color:black; " href="/viewusers">Users</a></li>
-                            <% } %>
-                    </ul>
-                </p>
-            </div>
-        </div>
+            <div>
+                <section style="padding:80px 190px">
+                    <article>
+                        <p style="color:#838C95;font-size:19px">Who we are</p>
+                    </article>
+                    <article>
+                        <p style="color:#232629;font-size:43px">Empowering the world to develop technology through collective knowledge.</p>
 
-        <!-- Main Content : All Questions -->
-        <div class="container main-content " style="position:absolute;top:80px;left:380px;border-left:2px solid rgb(195, 184, 184);height:auto; ">
-            <div class="row justify-content-between ">
-                <div class="col-4 ">
-                    <h1>All Users</h1>
-                </div>
-                <!-- <% if(session.user_id && session.userType == 'admin'){ %>
-                    <div class="col-4 ">
-                        <a href="" class="btn btn-primary" name="postquestion" style="border-radius:3px">Post a Question</a>
-                    </div>
-                    <% }  %> -->
-
-
+                    </article>
+                    <article>
+                        <p style="color:#525960;font-size:19px">Our public platform <b>serves 100 million people every month</b>, making it one of the most popular websites in the world.</p>
+                    </article>
+                    <article>
+                        <p style="color:#525960;font-size:19px">Our asynchronous knowledge management and collaboration offering, <b>Stack Overflow for Teams</b>, is transforming how people work.</p>
+                    </article>
+                </section>
 
             </div>
-
-            <ul style="list-style-type:none;">
-                <% if (result.length){ 
-                    for(var i=0; i < result.length; i++){ %>
-                    <hr width="80%">
-                    <li>
-                        <%= result[i].uid %> :
-                            <%= result[i].eid %> asked **
-                                <%= result[i].TotalQuestionsAsked %> question **
-                    </li>
-                    <% }
-            } %>
-
         </div>
     </div>
+    <footer class="bg-dark text-center text-white" style="padding:20px 60px;">
+        <div class="p-wrapper bar0 mx-auto pt48 pb64 sm:pt32 sm:pb0 fs-body2 overflow-hidden print:d-none">
+            <div class="d-flex sm:fd-column">
+                <div class="flex--item3 sm:mb32" style="padding-left:100px;padding-top:20px;">
+                    <svg aria-hidden="true" width="40" height="40" class="native svg-icon iconLogoGlyphMd">
+                        <path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path>
+                        <path d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z" fill="#F48024"></path>
+                    </svg>
+                </div>
+                <div class="d-flex fl1 ff-row-wrap sm:mb32" style="padding-left:180px;text-align:left">
+                    <div class="flex--item6" style="padding:20px 30px;">
+                        <h3 class="tt-uppercase fs-body2 fc-black-200" style="color:#BABFC4">Stack Overflow</h3>
+                        <a href="https://stackoverflow.co/" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">About</a>
+                        <a href="https://stackoverflow.co/company/press" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Press</a>
+                        <a href="https://stackoverflow.co/company/work-here" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Work Here</a>
+                        <a href="https://stackoverflow.co/company/contact" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Contact Us</a>
+                        <a href="https://stackoverflow.com/questions" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Questions</a>
+                    </div>
+                    <div class="flex--item6" style="padding:20px 40px;text-align:left">
+                        <h3 class="tt-uppercase fs-body2 fc-black-200" style="color:#BABFC4;padding-left:0px;">Products</h3>
+                        <a href="https://stackoverflow.co/teams" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Teams</a>
+                        <a href="https://stackoverflow.co/advertising" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95"> Advertising</a>
+                        <a href="https://stackoverflow.co/collectives" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Collectives</a>
+                        <a href="https://stackoverflow.co/talent" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Talent</a>
+                    </div>
+                </div>
+                <div class="d-flex fl1 ff-row-wrap sm:mb32">
+                    <div class="flex--item6" style="padding:20px 40px;text-align:left">
+                        <h3 class="tt-uppercase fs-body2 fc-black-200" style="color:#BABFC4;">Policies</h3>
+                        <a href="https://stackoverflow.com/legal" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Legal</a>
+                        <a href="https://stackoverflow.com/legal/privacy-policy" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Privacy Policy</a>
+                        <a href="https://stackoverflow.com/legal/terms-of-service" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Terms of Service</a>
+                        <span onclick="OneTrust.ToggleInfoDisplay()" class="fc-black-400 h:fc-black-200 py2 d-block c-pointer" style="text-decoration:none;color:#838C95">Cookie Settings</span>
+                        <a href="https://stackoverflow.com/legal/cookie-policy" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Cookie Policy</a>
+                    </div>
+                    <div class="flex--item6" style="padding:20px 40px;text-align:left">
+                        <h3 class="tt-uppercase fs-body2 fc-black-200" style="color:#BABFC4;">Channels</h3>
+                        <a href="https://stackoverflow.blog/" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95"> Blog </a>
+                        <a href="https://stackoverflow.blog/podcast" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Podcast</a>
+                        <a href="https://stackoverflow.blog/newsletter" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Newsletter</a>
+                        <a href="https://twitter.com/stackoverflow" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Twitter</a>
+                        <a href="https://linkedin.com/company/stack-overflow" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">LinkedIn</a>
+                        <a href="https://www.instagram.com/thestackoverflow/" class="fc-black-400 h:fc-black-200 py2 d-block" style="text-decoration:none;color:#838C95">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
 
     <script>

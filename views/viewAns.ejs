@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196">
     <title>Detail Question Answer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
@@ -18,12 +19,12 @@
     <!-- Navigation Bar -->
 
     <nav class="navbar bg-light" id="navbar_top" style="box-shadow: 0 2px 5px #BBC0C4;">
-        <div class="container-fluid">
+        <div class="container-fluid" style="width:100%">
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg" alt="logo" width="400" height="28" class="d-inline-block align-text-top">
             </a>
-            <a class="nav-link" style="position:absolute;right:1100px;" href="#">About</a>
+            <a class="nav-link" style="position:absolute;right:1100px;" href="/about">About</a>
             <form class="d-flex" role="search" style="position:absolute;right:700px;" method="post" action="/search">
                 <input class="form-control me-2" type="search" name="searchkeyword" placeholder="Search..." aria-label="Search">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -69,7 +70,7 @@
                                 <select class="form-select" id="usertype" name="utype" aria-label="ChooseUser">
                                    <option selected>--Choose a User--</option>
                                    <option value="admin">Admin</option>
-                                   <option value="user">General User</option>
+                                   <option value="user">User</option>
                                  </select>
                             </div>
 
@@ -196,25 +197,47 @@
                                     <h2>Answers</h2>
                                     <% for(var i=0; i < data.length; i++){ %>
 
-                                        <li>
-
-                                            <div style="width:80%">
-                                                <label style="font-weight:bold;"><%= i+1 %>.</label>
-                                                <%= data[i].Answer %>
+                                        <% if(session.user_id) { %>
+                                            <div style="display:flex;flex-direction:column;">
+                                                <a href="/upvote/<%= data[i].uid %>"><i class="fa fa-caret-up" style="font-size:100px;color:#BBC0C4"></i></a>
+                                                <a href="/downvote/<%= data[i].uid %>"><i class="fa fa-caret-down" style="font-size:100px;color:#BBC0C4"></i></a>
                                             </div>
-                                        </li>
-                                        <% if(data[i].aImage != null){  %>
+
                                             <li>
-                                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+
+                                                <div style="width:80%;position:relative;left:100px;top:-180px;overflow-x:hidden">
+                                                    <label style="font-weight:bold;"><%= i+1 %>.</label>
+                                                    <%= data[i].Answer %>
+                                                </div>
                                             </li>
-                                            <% } %>
-                                                <hr width="80%">
 
-                                                <% 
+                                            <% if(data[i].aImage != null){  %>
+                                                <li style="position:relative;left:100px;top:-170px;background-color:#f6f6f6;padding:15px 15px;width:fit-content">
+                                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+                                                </li>
+                                                <% } %>
+                                                    <% } else { %>
+                                                        <li>
 
-                        
-                    } 
-                } %>
+                                                            <div style="width:80%;">
+                                                                <label style="font-weight:bold;"><%= i+1 %>.</label>
+                                                                <%= data[i].Answer %>
+                                                            </div>
+                                                        </li>
+
+                                                        <% if(data[i].aImage != null){  %>
+                                                            <li style="background-color:#f6f6f6;padding:15px 15px;width:fit-content">
+                                                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+                                                            </li>
+                                                            <% } } %>
+                                                                <hr width="80%">
+
+                                                                <% } 
+                                }else{ %>
+                                                                    <h1>
+                                                                        <%= message %>
+                                                                    </h1>
+                                                                    <% } %>
 
 
         </div>

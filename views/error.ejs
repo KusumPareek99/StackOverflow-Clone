@@ -13,13 +13,15 @@
 </head>
 
 <body style="overflow-x:hidden;font-family: 'Roboto Slab', serif;">
-    <h1>
-        <%= message %>
-    </h1>
-    <h2>
-        <%= error.status %>
-    </h2>
-    <pre><%= error.stack %></pre>
+    <div style="background-color:aliceblue;padding:20px 20px;">
+        <h1>
+            <%= message %>
+        </h1>
+        <h2>
+            <%= error.status %>
+        </h2>
+        <pre><%= error.stack %></pre>
+    </div>
 </body>
 
 </html>

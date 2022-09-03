@@ -1,5 +1,5 @@
 var express = require('express');
-const { request } = require('../app');
+const { request, response } = require('../app');
 var router = express.Router();
 
 var database = require('../database');
@@ -9,10 +9,10 @@ router.get('/', function(req, res) {
 
     database.query('SELECT QuestionID, Qsubject , Description,UserID,Image,date_format(DatePosted,"%m-%d-%y %h:%i %p") AS DatePosted from quest ORDER BY DatePosted DESC', function(err, rows) {
         if (err) {
-            res.render('index', { title: 'Express', session: req.session, data: '' });
+            res.render('index', { title: 'Express', session: req.session, data: '', message: '' });
         } else {
 
-            res.render('index', { title: 'Express', session: req.session, data: rows });
+            res.render('index', { title: 'Express', session: req.session, data: rows, message: '' });
 
         }
     });
@@ -24,7 +24,7 @@ router.post('/login', function(request, response, next) {
     var user_type = request.body.utype;
     var user_email_address = request.body.username;
     var user_password = request.body.password;
-
+    msg = '';
     if (user_type == 'user') {
 
         //general user login
@@ -45,16 +45,25 @@ router.post('/login', function(request, response, next) {
 
                             response.redirect("/");
                         } else {
-                            response.send('Incorrect Password');
+                            //response.send('Incorrect Password');
+                            msg = 'Incorrect Password'
+                            response.render('loginError', { title: 'Express', session: request.session, message: msg });
+
                         }
                     }
                 } else {
-                    response.send('Incorrect Email Address');
+                    //response.send('Incorrect Email Address');
+                    msg = 'Incorrect Email Address'
+                    response.render('loginError', { title: 'Express', session: request.session, message: msg });
+
                 }
                 response.end();
             });
         } else {
-            response.send('Please Enter Email Address and Password Details');
+            //response.send('Please Enter Email Address and Password Details');
+            msg = 'Please Enter Email Address and Password Details'
+            response.render('loginError', { title: 'Express', session: request.session, data: rows, message: msg });
+
             response.end();
         }
     } else if (user_type == 'admin') {
@@ -117,6 +126,12 @@ router.get('/logout', function(request, response, next) {
 
 });
 
+router.get('/forgetpass', function(request, response) {
+    //response.render('forgetPass');
+
+    response.render('forgetPass', { message: '', type: '' })
+})
+
 router.post('/search', function(request, response) {
     var kw = request.body.searchkeyword;
     if (kw == '') {
@@ -138,15 +153,17 @@ router.post('/search', function(request, response) {
 router.get('/myans/:QuestionID', function(request, response) {
     var qid = request.params.QuestionID;
     console.log(qid)
-    var sql = `SELECT Answer,answer.Image as aImage ,quest.QuestionID as qid ,Qsubject,Description,quest.Image as qImage FROM stackoverflowclone.answer JOIN  stackoverflowclone.quest on answer.QuestionID = '${qid}' and quest.QuestionID='${qid}';`;
-
+    var sql = `SELECT answer.UserID AS uid, Answer,answer.Image as aImage ,quest.QuestionID as qid ,Qsubject,Description,quest.Image as qImage FROM stackoverflowclone.answer JOIN  stackoverflowclone.quest on answer.QuestionID = '${qid}' and quest.QuestionID='${qid}';`;
+    msg = ''
     console.log("query of my ans ", sql);
 
     database.query(sql, function(err, result) {
         if (result.length > 0) {
-            response.render('viewAns', { data: result, session: request.session });
+            response.render('viewAns', { data: result, session: request.session, message: msg });
         } else {
-            response.send('<h1>No Answers Posted yet.</h1>')
+            //response.send('<h1>No Answers Posted yet.</h1>')
+            msg = 'No Answers Posted yet.'
+            response.render('viewAns', { data: '', session: request.session, message: msg });
         }
     })
 });
@@ -216,5 +233,47 @@ router.get('/tagsredirect/:tag', function(request, response) {
         }
     })
 });
+
+router.get('/upvote/:uid', function(req, res) {
+
+    var uid = req.params.uid;
+    var sql = `UPDATE stackoverflowclone.user SET Points = Points + 1 WHERE (UserID = ${uid});`;
+    console.log("UPVOTE QUERY : ", sql);
+    database.query(sql, function(err) {
+        if (err) throw err;
+
+    })
+    res.redirect('/')
+
+})
+router.get('/upvote/:uid', function(req, res) {
+
+    var uid = req.params.uid;
+    var sql = `UPDATE stackoverflowclone.user SET Points = Points + 1 WHERE (UserID = ${uid});`;
+    console.log("UPVOTE QUERY : ", sql);
+    database.query(sql, function(err) {
+        if (err) throw err;
+
+    })
+    res.redirect('/')
+
+})
+
+router.get('/downvote/:uid', function(req, res) {
+
+    var uid = req.params.uid;
+    var sql = `UPDATE stackoverflowclone.user SET Points = Points - 1 WHERE (UserID = ${uid});`;
+    console.log("UPVOTE QUERY : ", sql);
+    database.query(sql, function(err) {
+        if (err) throw err;
+
+    })
+    res.redirect('/')
+
+})
+
+router.get('/about', function(req, res) {
+    res.render("about", { session: req.session });
+})
 
 module.exports = router;
