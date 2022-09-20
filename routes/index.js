@@ -85,16 +85,25 @@ router.post('/login', function(request, response, next) {
 
                             response.redirect("/");
                         } else {
-                            response.send('Incorrect Password');
+                            //response.send('Incorrect Password');
+                            msg = 'Incorrect Password'
+                            response.render('loginError', { title: 'Express', session: request.session, message: msg });
+
                         }
                     }
                 } else {
-                    response.send('Incorrect Email Address');
+                    //response.send('Incorrect Email Address');
+                    msg = 'Incorrect Email Address'
+                    response.render('loginError', { title: 'Express', session: request.session, message: msg });
+
                 }
                 response.end();
             });
         } else {
-            response.send('Please Enter Email Address and Password Details');
+            //response.send('Please Enter Email Address and Password Details');
+            msg = 'Please Enter Email Address and Password Details'
+            response.render('loginError', { title: 'Express', session: request.session, data: rows, message: msg });
+
             response.end();
         }
     }
@@ -169,7 +178,7 @@ router.get('/myans/:QuestionID', function(request, response) {
 });
 
 router.get('/viewchart', function(req, res) {
-    console.log("move to")
+    // console.log("move to")
     var sql = `select keyword,count(*) as total from keywords group by keyword order by total desc limit 5;`
     console.log(sql)
     database.query(sql, function(err, result) {

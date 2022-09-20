@@ -48,15 +48,6 @@ app.get('/myans/:QuestionID', indexRouter);
 app.get('/tagsredirect/:tag', indexRouter);
 app.use('/reset-pass', resetpass)
 app.get('/upvote/:uid', indexRouter)
-    //app.use('/viewchart', dashboard);
-
-
-/*app.use(session({
-    secret: 'miniproject',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
-}))*/
 
 app.use(flash());
 // catch 404 and forward to error handler
