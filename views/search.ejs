@@ -199,7 +199,7 @@
                     </li>
                     <% if(data[i].Image != null){  %>
                         <li>
-                            <br> <img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].Image%>" height="250" width="250" class="img-circle img-responsive">
+                            <br> <img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].Image%>" height="250" width="250" class="img-circle img-responsive zoomE" style="cursor:zoom-in;">
                         </li>
                         <% } %>
 
@@ -227,6 +227,36 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2 " crossorigin="anonymous "></script>
     <script>
+        window.onload = () => {
+            // (A) GET ALL IMAGES
+            let all = document.getElementsByClassName("zoomE");
+
+            // (B) CLICK TO GO FULLSCREEN
+            if (all.length > 0) {
+                for (let i of all) {
+                    i.onclick = () => {
+                        // (B1) EXIT FULLSCREEN
+                        if (document.fullscreenElement != null || document.webkitFullscreenElement != null) {
+                            if (document.exitFullscreen) {
+                                document.exitFullscreen();
+                            } else {
+                                document.webkitCancelFullScreen();
+                            }
+                        }
+
+                        // (B2) ENTER FULLSCREEN
+                        else {
+                            if (i.requestFullscreen) {
+                                i.requestFullscreen();
+                            } else {
+                                i.webkitRequestFullScreen();
+                            }
+                        }
+                    };
+                }
+            }
+        };
+
         function validate_password() {
 
             var pass = document.getElementById('inputPasswordSignup').value;

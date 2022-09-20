@@ -191,7 +191,7 @@
                         <% } %>
                             <% if(data[0].qImage != null){  %>
                                 <li>
-                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[0].qImage%>" height="250" width="250" class="img-circle img-responsive"> </li>
+                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[0].qImage%>" height="250" width="250" class="img-circle img-responsive zoomE" style="cursor:zoom-in;"> </li>
                                 <% } %>
                                     <hr width="80%">
                                     <h2>Answers</h2>
@@ -213,7 +213,7 @@
 
                                             <% if(data[i].aImage != null){  %>
                                                 <li style="position:relative;left:100px;top:-170px;background-color:#f6f6f6;padding:15px 15px;width:fit-content">
-                                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+                                                    <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive zoomE" style="cursor:zoom-in">
                                                 </li>
                                                 <% } %>
                                                     <% } else { %>
@@ -227,7 +227,7 @@
 
                                                         <% if(data[i].aImage != null){  %>
                                                             <li style="background-color:#f6f6f6;padding:15px 15px;width:fit-content">
-                                                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive">
+                                                                <br><img alt="No Question Picture Added" src="http://localhost:3000/images/uploaded_image/<%= data[i].aImage%>" height="250" width="250" class="img-circle img-responsive zoomE" style="cursor:zoom-in">
                                                             </li>
                                                             <% } } %>
                                                                 <hr width="80%">
@@ -245,6 +245,36 @@
     </div>
 
     <script>
+        window.onload = () => {
+            // (A) GET ALL IMAGES
+            let all = document.getElementsByClassName("zoomE");
+
+            // (B) CLICK TO GO FULLSCREEN
+            if (all.length > 0) {
+                for (let i of all) {
+                    i.onclick = () => {
+                        // (B1) EXIT FULLSCREEN
+                        if (document.fullscreenElement != null || document.webkitFullscreenElement != null) {
+                            if (document.exitFullscreen) {
+                                document.exitFullscreen();
+                            } else {
+                                document.webkitCancelFullScreen();
+                            }
+                        }
+
+                        // (B2) ENTER FULLSCREEN
+                        else {
+                            if (i.requestFullscreen) {
+                                i.requestFullscreen();
+                            } else {
+                                i.webkitRequestFullScreen();
+                            }
+                        }
+                    };
+                }
+            }
+        };
+
         function validate_password() {
 
             var pass = document.getElementById('inputPasswordSignup').value;
